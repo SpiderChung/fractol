@@ -60,6 +60,7 @@ int main(int argc, char **argv)
 	//mlx_hook(img.mlx_win, 5, 1L << 4, mouse_hook, &img);
 	mlx_key_hook(img.mlx_win, key_hook, &img);
 	mlx_loop(img.mlx);
+	get_fractal(&img);
 	//if (init_str(&str, argv[1]) == -1)
 	//	return (1);
 	//draw_str(str);

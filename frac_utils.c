@@ -1,7 +1,6 @@
 #include "headers/fractol.h"
 #include "headers/libft.h"
 
-
 int	ft_check_title(char *str)
 {
 	int size;
@@ -36,4 +35,13 @@ int	create_trgb(int t, int r, int g, int b)
 			b = b - 255;
 	}
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void get_fractal(t_data *img)
+{
+	img->canvas->max_x = WIN_WIDTH;
+	img->canvas->max_y = WIN_HEIGHT;
+	img->canvas->center_x = WIN_WIDTH / 2;
+	img->canvas->center_y = WIN_HEIGHT; / 2;
+	mandelbrot_set(img);
 }

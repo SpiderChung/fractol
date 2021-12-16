@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:56:45 by schung            #+#    #+#             */
-/*   Updated: 2021/12/12 21:27:07 by schung           ###   ########.fr       */
+/*   Updated: 2021/12/16 20:02:42 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_complex
 {
 	double	re;
 	double	im;
-}				t_complex;
+}	t_complex;
 
 typedef struct s_canvas
 {
@@ -51,6 +51,19 @@ typedef struct s_canvas
 	float	center_y;
 }	t_canvas;
 
+typedef struct s_temp
+{
+	float	x0;
+	float	y0;
+	float	temp_x;
+	float	temp_y;
+	float	temp_z;
+	float	x;
+	float	y;
+	float	z;
+	float	c;
+	int		iter;
+}	t_temp;
 
 typedef struct	s_data
 {
@@ -74,6 +87,11 @@ int		frac_errors(int i);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
 int		ft_check_title(char *str);
+void	get_fractal();
 
+/*________mandelbrot.c__________*/
+void 	mandelbrot_set(t_data *img);
+void 	iter_mandelbrot(t_data *img);
+void	iter_xy(t_temp *temp)
 
 #endif
