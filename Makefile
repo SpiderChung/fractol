@@ -6,7 +6,7 @@
 #    By: schung <schung@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/01 15:57:27 by schung            #+#    #+#              #
-#    Updated: 2021/12/12 19:25:54 by schung           ###   ########.fr        #
+#    Updated: 2021/12/18 16:27:44 by schung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,12 @@ REMOVE = rm -f
 
 FOREIGN_TARGETS = libft/libft.a
 
-%.o: %.c 
+%.o: %.c
 	$(CC) -I $(HEADERS) -Imlx -c $< -o $@
 
-all: lftm $(NAME) 
+all: lftm $(NAME)
 
-$(NAME): $(OBJ) $(FOREIGN_TARGETS)
+$(NAME): $(OBJ) $(FOREIGN_TARGETS) 
 	@$(CC) -I $(HEADERS) $(OBJ) -L /usr/local/lib/ -lmlx -framework OpenGL -framework OpenCL -framework AppKit -Llibft -lft -o $(NAME)
 	@echo "[INFO] Fractol [$(NAME)] created"
 

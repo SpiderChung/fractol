@@ -5,10 +5,11 @@ int	ft_check_title(char *str)
 {
 	int size;
 
+
 	size = ft_strlen(str);
-	if (ft_strequal(str, "Julia"))
-		return (1);
 	if (ft_strequal(str, "Mandelbrot"))
+		return (1);
+	if (ft_strequal(str, "Julia"))
 		return (2);
 	if (ft_strequal(str, "Celtic_Mandelbrot"))
 		return (3);
@@ -37,11 +38,22 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void get_fractal(t_data *img)
+void	get_fractal(t_data *img)
 {
 	img->canvas->max_x = WIN_WIDTH;
 	img->canvas->max_y = WIN_HEIGHT;
 	img->canvas->center_x = WIN_WIDTH / 2;
-	img->canvas->center_y = WIN_HEIGHT; / 2;
-	mandelbrot_set(img);
+	img->canvas->center_y = WIN_HEIGHT / 2;
+	img->canvas->x = 1;
+	img->canvas->y = 1;
+	img->canvas->zoom = 500;
+	if (img->num_frac == 1)
+	{	
+		mandelbrot_set(img, 0, 0, 0);
+		printf("love = %d", img->num_frac);
+	}
+	else if (img->num_frac == 2)
+		julia_set(img);
+	else if (img->num_frac == 3)
+		celtic_mandelbrot_set(img);
 }

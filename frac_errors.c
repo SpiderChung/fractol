@@ -5,6 +5,40 @@ int	frac_errors(int i)
 {
 	if (i == 1)
 		 printf("usage: fractol [fractal name]\nFractal names:\n"
-		"\t\t- Julia\n\t\t- Mandelbrot\n\t\t- Celtic_Mandelbrot\n");
+			"\t\t- Julia\n\t\t- Mandelbrot\n\t\t- Celtic_Mandelbrot\n");
 	return (-1);
+}
+
+int	set_color(t_data *img, t_temp *temp)
+{
+	if (img->color == 0 || img->color == 10)
+		return (create_trgb(0, temp->i * 2, temp->i * 3, temp->i * 5));
+	else if (img->color == 1 || img->color == 11)
+		return (create_trgb(0, temp->i * 3, temp->i * 5, temp->i * 2));
+	else if (img->color == 2 || img->color == 12)
+		return (create_trgb(0, temp->i * 5, temp->i * 2, temp->i * 3));
+	else if (img->color == 3 || img->color == 13)
+		return (create_trgb(0, temp->i * 5, temp->i * 2, temp->i * 5));
+	else if (img->color == 4 || img->color == 14)
+		return (create_trgb(0, temp->i * 5, temp->i * 5, temp->i * 2));
+	else if (img->color == 5 || img->color == 15)
+		return (create_trgb(0, temp->i * 2, temp->i * 5, temp->i * 5));
+	else if (img->color == 6 || img->color == 16)
+		return (create_trgb(0, temp->i * 5, temp->i * 8, temp->i * 13));
+	else if (img->color == 7 || img->color == 17)
+		return (create_trgb(0, temp->i * 8, temp->i * 13, temp->i * 5));
+	else if (img->color == 8 || img->color == 18)
+		return (create_trgb(0, temp->i * 13, temp->i * 5, temp->i * 8));
+	else if (img->color == 9 || img->color == 19)
+		return (create_trgb(0, temp->i * 89, temp->i * 144, temp->i * 233));
+	else
+		return (0);
+}
+
+int	set_color_center(t_data *img)
+{
+	if (img->color >= 0 && img->color < 10)
+		return (create_trgb(0, 255, 255, 255));
+	else
+		return (create_trgb(0, 0, 0, 0));
 }
