@@ -33,7 +33,7 @@ FOREIGN_TARGETS = libft/libft.a
 %.o: %.c
 	$(CC) -I $(HEADERS) -Imlx -c $< -o $@
 
-all: lftm $(NAME)
+all: lftm $(NAME) 
 
 $(NAME): $(OBJ) $(FOREIGN_TARGETS) 
 	@$(CC) -I $(HEADERS) $(OBJ) -L /usr/local/lib/ -lmlx -framework OpenGL -framework OpenCL -framework AppKit -Llibft -lft -o $(NAME)

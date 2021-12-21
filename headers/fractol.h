@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:56:45 by schung            #+#    #+#             */
-/*   Updated: 2021/12/18 17:27:45 by schung           ###   ########.fr       */
+/*   Updated: 2021/12/21 20:56:26 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@
 # include <time.h>
 # include <pthread.h>
 
-# define WIN_WIDTH 1620
+# define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
+# define KEY_1 18
+# define KEY_2 19
+# define KEY_3 20
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
@@ -49,6 +52,9 @@ typedef struct s_canvas
 	float	center_x;
 	float	center_y;
 	float	zoom;
+	float	a;
+	float	b;
+	int		iter;
 }	t_canvas;
 
 typedef struct s_temp
@@ -82,26 +88,38 @@ typedef struct s_data
 	int			color;
 }	t_data;
 
+/*________fractol.c__________*/
+void ft_menu(t_data *img);
+int	key_hook(int keycode, t_data *vars);
+int	mouse_hook(int mouse, int x, int y, t_data *vars);
+
+
 /*________frac_errors.c__________*/
 int		frac_errors(int i);
 int		set_color(t_data *img, t_temp *temp);
 int		set_color_center(t_data *img);
+void	set_init_param(t_data *img);
 
 /*________frac_utils.c__________*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
 int		ft_check_title(char *str);
-void	get_fractal(t_data *img);
+void	get_fractal(t_data *img, int dx, int dy, float dz);
 
 /*________mandelbrot.c__________*/
 void	mandelbrot_set(t_data *img, int dx, int dy, float dz);
 void	iter_mandelbrot(t_data *img);
-void	iter_xy(t_temp *temp);
+void	iter_xy_m(t_temp *temp);
+void	set_temp(t_data *img, t_temp *temp);
 
 /*________julia.c__________*/
-void	julia_set(t_data *img);
+void	julia_set(t_data *img, int dx, int dy, float dz);
+void	iter_xy_j(t_temp *temp);
+void	set_tmp_j(t_data *img, t_temp *temp);
 
 /*________celtic_mandelbrot.c__________*/
-void	celtic_mandelbrot_set(t_data *img);
+void	celtic_mandelbrot_set(t_data *img, int dx, int dy, float dz);
+void	iter_xy_celtic(t_temp *temp);
+void	iter_celtic_mandelbrot(t_data *img);
 
 #endif

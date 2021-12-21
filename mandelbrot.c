@@ -2,7 +2,7 @@
 #include "headers/libft.h"
 
 
-void	iter_xy(t_temp *temp)
+void	iter_xy_m(t_temp *temp)
 {
 	temp->temp_x = temp->x * temp->x - temp->y * temp->y + temp->x0;
 	temp->temp_y = 2 * temp->x * temp->y + temp->y0;
@@ -22,6 +22,7 @@ void	set_temp(t_data *img, t_temp *temp)
 	temp->y = temp->y0;
 	temp->z = temp->x * temp->x + temp->y * temp->y;
 	temp->iter = 200;
+	img->canvas->iter = temp->iter;
 	temp->i = 0;
 	temp->p = sqrt((temp->x - 0.25) * (temp->x - 0.25) + temp->y * temp->y);
 	temp->pc = 0.5 - (cos(atan2(temp->y, temp->x - 0.25)) / 2);
@@ -39,7 +40,7 @@ void	iter_mandelbrot(t_data *img)
 	{
 		while (temp.i < temp.iter && temp.z < 4)
 		{
-			iter_xy(&temp);
+			iter_xy_m(&temp);
 			temp.i++;
 		}
 		if (temp.i == temp.iter)
@@ -69,4 +70,5 @@ void	mandelbrot_set(t_data *img, int dx, int dy, float dz)
 		img->canvas->x++;
 	}
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
+	ft_menu(img);
 }

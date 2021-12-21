@@ -38,22 +38,19 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	get_fractal(t_data *img)
+void	get_fractal(t_data *img, int dx, int dy, float dz)
 {
-	img->canvas->max_x = WIN_WIDTH;
+	/*img->canvas->max_x = WIN_WIDTH;
 	img->canvas->max_y = WIN_HEIGHT;
 	img->canvas->center_x = WIN_WIDTH / 2;
 	img->canvas->center_y = WIN_HEIGHT / 2;
 	img->canvas->x = 1;
 	img->canvas->y = 1;
-	img->canvas->zoom = 500;
+	img->canvas->zoom = 500;*/
 	if (img->num_frac == 1)
-	{	
-		mandelbrot_set(img, 0, 0, 0);
-		printf("love = %d", img->num_frac);
-	}
+		mandelbrot_set(img, dx, dy, dz);
 	else if (img->num_frac == 2)
-		julia_set(img);
+		julia_set(img, dx, dy, dz);
 	else if (img->num_frac == 3)
-		celtic_mandelbrot_set(img);
+		celtic_mandelbrot_set(img, dx, dy, dz);
 }
