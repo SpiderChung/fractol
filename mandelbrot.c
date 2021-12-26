@@ -21,8 +21,7 @@ void	set_temp(t_data *img, t_temp *temp)
 	temp->x = temp->x0;
 	temp->y = temp->y0;
 	temp->z = temp->x * temp->x + temp->y * temp->y;
-	temp->iter = 200;
-	img->canvas->iter = temp->iter;
+	temp->iter = img->canvas->iter;
 	temp->i = 0;
 	temp->p = sqrt((temp->x - 0.25) * (temp->x - 0.25) + temp->y * temp->y);
 	temp->pc = 0.5 - (cos(atan2(temp->y, temp->x - 0.25)) / 2);

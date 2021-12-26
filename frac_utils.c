@@ -40,13 +40,11 @@ int	create_trgb(int t, int r, int g, int b)
 
 void	get_fractal(t_data *img, int dx, int dy, float dz)
 {
-	/*img->canvas->max_x = WIN_WIDTH;
-	img->canvas->max_y = WIN_HEIGHT;
-	img->canvas->center_x = WIN_WIDTH / 2;
-	img->canvas->center_y = WIN_HEIGHT / 2;
-	img->canvas->x = 1;
-	img->canvas->y = 1;
-	img->canvas->zoom = 500;*/
+	if (img->color == 20)
+		img->color = 0;
+	if (img->color == -1)
+		img->color = 19;
+	
 	if (img->num_frac == 1)
 		mandelbrot_set(img, dx, dy, dz);
 	else if (img->num_frac == 2)

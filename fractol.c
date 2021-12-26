@@ -26,32 +26,36 @@ void ft_menu(t_data *img)
 	else if (img->num_frac == 3)
 		mlx_string_put(img->mlx, img->mlx_win, 150, 6, 0x0000BFFF,
 			 "Celtic Mandelbrot");
-	mlx_string_put(img->mlx, img->mlx_win, 6, 56, 0x0000BFFF,
+	mlx_string_put(img->mlx, img->mlx_win, 6, 36, 0x0000BFFF,
 		 "Esc for exit");
-	mlx_string_put(img->mlx, img->mlx_win, 6, 106, 0x0000BFFF,
+	mlx_string_put(img->mlx, img->mlx_win, 6, 66, 0x0000BFFF,
 		 "P for psychodelic");
-	mlx_string_put(img->mlx, img->mlx_win, 6, 156, 0x0000BFFF,
+	mlx_string_put(img->mlx, img->mlx_win, 6, 96, 0x0000BFFF,
 		 "+/- for change color");
-	mlx_string_put(img->mlx, img->mlx_win, 6, 206, 0x0000BFFF,
+	mlx_string_put(img->mlx, img->mlx_win, 6, 126, 0x0000BFFF,
 		 ft_strjoin("Iterations ", ft_itoa(img->canvas->iter)));
+	if (img->num_frac == 2)
+	{
+		mlx_string_put(img->mlx, img->mlx_win, 6, 156, 0x0000BFFF,
+			 ft_strjoin("a = ", ft_ftoa(img->canvas->a, 5)));
+		mlx_string_put(img->mlx, img->mlx_win, 100, 156, 0x0000BFFF,
+			 ft_strjoin("b = ", ft_ftoa(img->canvas->b, 5)));
+	}
 	printf("a = %f,   b = %f\n", img->canvas->a, img->canvas->b);
 
 }
 
 int	key_hook(int keycode, t_data *vars)
 {
+	printf("------%d -----", keycode);
 	if (keycode == KEY_PLUS)
 	{
 		vars->color++;
-		if (vars->color == 20)
-			vars->color = 0;
 		get_fractal(vars, 0, 0, 0);
 	}
 	else if (keycode == KEY_MINUS)
 	{
 		vars->color--;
-		if (vars->color == -1)
-			vars->color = 19;
 		get_fractal(vars, 0, 0, 0);
 	}
 	else if (keycode == KEY_ESC)
@@ -70,6 +74,30 @@ int	key_hook(int keycode, t_data *vars)
 		get_fractal(vars, 0, 15, 0);
 	else if (keycode == KEY_DOWN)
 		get_fractal(vars, 0, -15, 0);
+	else if (keycode == KEY_TAB)
+		vars->psycho *= (-1);
+	
+	return (0);
+}
+
+int hookl(t_data *vars)
+{
+	static int y;
+
+	y++;
+	printf("----%d----\n", y);
+	if (vars->psycho == 1 && y == 120)
+	{
+		vars->color++;
+		if (vars->color == 9)
+			vars->color = 0;
+		else if (vars->color == 19)
+			vars->color = 10;
+		get_fractal(vars, 0, 0, 0);
+		y = 0;
+	}
+	else if (y == 120)
+		y = 0;
 	return (0);
 }
 
@@ -81,6 +109,7 @@ int	mouse_hook(int mouse, int x, int y, t_data *vars)
 			- ((float )x - vars->canvas->center_x) * 1.1,
 			((float )y - vars->canvas->center_y)
 			- ((float )y - vars->canvas->center_y) * 1.1, 1.1);
+		vars->canvas->iter += 2;
 	}
 	else if (mouse == 5)
 	{
@@ -88,6 +117,7 @@ int	mouse_hook(int mouse, int x, int y, t_data *vars)
 			- ((float )x - vars->canvas->center_x) * 0.9,
 			((float )y - vars->canvas->center_y)
 			- ((float )y - vars->canvas->center_y) * 0.9, 0.9);
+		vars->canvas->iter -= 2;
 	}
 	if (mouse == 1 && vars->num_frac == 2)
 	{
@@ -114,9 +144,9 @@ int main(int argc, char **argv)
 		 &img.endian);
 	set_init_param(&img);
 	mlx_hook(img.mlx_win, 4, 1L << 2, mouse_hook, &img);
-	//mlx_hook(img.mlx_win, 5, 1L << 4, mouse_hook, &img);
-	get_fractal(&img, 0, 0, 0);
+	//get_fractal(&img, 0, 0, 0);
 	mlx_key_hook(img.mlx_win, key_hook, &img);
+	mlx_loop_hook(img.mlx, hookl, &img);
 	mlx_loop(img.mlx);
 	return (0);
 }

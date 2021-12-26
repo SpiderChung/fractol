@@ -15,15 +15,15 @@
 
 //# include "libft.h"
 # include <math.h>
-# include <mlx.h>
+# include "../minilibx/mlx.h"
 # include <stdlib.h>
-# include <fcntl.h>
+//# include <fcntl.h>
 # include <stdio.h>
-# include <time.h>
-# include <pthread.h>
+//# include <time.h>
+//# include <pthread.h>
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 800
 
 # define KEY_1 18
 # define KEY_2 19
@@ -86,6 +86,7 @@ typedef struct s_data
 	t_canvas	*canvas;
 	int			num_frac;
 	int			color;
+	int			psycho;
 }	t_data;
 
 /*________fractol.c__________*/
@@ -99,6 +100,7 @@ int		frac_errors(int i);
 int		set_color(t_data *img, t_temp *temp);
 int		set_color_center(t_data *img);
 void	set_init_param(t_data *img);
+char	*ft_ftoa(float num, int size);
 
 /*________frac_utils.c__________*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);

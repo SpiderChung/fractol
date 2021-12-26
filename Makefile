@@ -36,7 +36,7 @@ FOREIGN_TARGETS = libft/libft.a
 all: lftm $(NAME) 
 
 $(NAME): $(OBJ) $(FOREIGN_TARGETS) 
-	@$(CC) -I $(HEADERS) $(OBJ) -L /usr/local/lib/ -lmlx -framework OpenGL -framework OpenCL -framework AppKit -Llibft -lft -o $(NAME)
+	@$(CC) -I $(HEADERS) $(OBJ) -Lminilibx -lmlx -framework OpenGL -framework OpenCL -framework AppKit -Llibft -lft -o $(NAME)
 	@echo "[INFO] Fractol [$(NAME)] created"
 
 $(FOREIGN_TARGETS):

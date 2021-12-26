@@ -21,8 +21,7 @@ void	set_tmp_j(t_data *img, t_temp *temp)
 	//temp->y0 = 0.11;
 	temp->z = temp->x * temp->x + temp->y * temp->y;
 	temp->i = 0;
-	temp->iter = 35;
-	img->canvas->iter = temp->iter;
+	temp->iter = img->canvas->iter;
 }
 
 void	iter_julia(t_data *img)
